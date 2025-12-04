@@ -113,7 +113,7 @@ mod tests {
     }
 }
 /*
-Instructipons:
+Instructions:
 
 1. In the language of your choice you have to build an in-memory key-value database that
 supports the following functions (See Fig 1 for a sample Java interface definition)
