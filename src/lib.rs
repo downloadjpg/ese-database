@@ -94,6 +94,22 @@ mod tests {
         // Check values
         assert_eq!(db.get("A"), Some(6));
         assert_eq!(db.get("B"), Some(20));
+
+        // Try to commit/rollback again without transaction
+        assert!(db.commit().is_err());
+        assert!(db.rollback().is_err());
+
+        // Rollback test
+        assert!(db.begin_transaction().is_ok());
+        assert!(db.put("A", 10).is_ok());
+        assert!(db.put("C", 30).is_ok());
+        // Rollback transaction
+        assert!(db.rollback().is_ok());
+        // Check values remain unchanged
+        assert_eq!(db.get("A"), Some(6));
+        assert_eq!(db.get("B"), Some(20));
+        assert_eq!(db.get("C"), None);
+
     }
 }
 /*
